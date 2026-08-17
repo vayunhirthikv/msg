@@ -29,8 +29,9 @@ app.get("/health",(req,res)=>{
 //if public dir exists, serve the static files
 if(fs.existsSync(publicDir)){
     app.use(express.static(publicDir));
-    app.get("/{*any}",(req,res,nxt)=>{
-        res.sendFile(path.join(publicDir,"index.html"),(err)=>nextTick(err));
+    app.get("/{*any}",(req,res,next)=>{
+        res.sendFile(path.join(publicDir,"index.html"),
+        (err)=>{if (err) next (err)});
     })
 }
 // What this whole block does
