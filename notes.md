@@ -22,3 +22,6 @@ Middleware:
 
 CORS (Cross Origin Resource Sharing):
     when a website tries to get data from another website , the browser might block it for security reasons.So we shld tell the backend to allow requests form your frontend
+
+WEBHOOKS :
+    automated messages that are sent when something happens
