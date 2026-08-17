@@ -15,3 +15,10 @@ HTTP STATUS CODE
 5xx : server error
     500 internal server error
     503 service unavailable
+
+Middleware:
+    function that runs between request and response.
+    we can do auth check which is the perfect use case of middleware
+
+CORS (Cross Origin Resource Sharing):
+    when a website tries to get data from another website , the browser might block it for security reasons.So we shld tell the backend to allow requests form your frontend
