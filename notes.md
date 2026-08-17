@@ -25,3 +25,30 @@ CORS (Cross Origin Resource Sharing):
 
 WEBHOOKS :
     automated messages that are sent when something happens
+
+THE BIG IDEA:
+    You deploy one single thing — a Docker container. Even though you have two separate apps (a React frontend and an Express backend), they get bundled together so that the backend serves the frontend. This is called a "monolith" deployment. No separate hosting for the frontend.
+
+
+## What happens, step by step
+
+Your **Dockerfile** builds the image in **3 stages**:
+
+### Stage 1 — Build the frontend (the website)
+
+* Takes your React code in `frontend/`
+* Runs `npm run build` (Vite), which turns all your React code into plain static files: HTML, JS, CSS
+* These land in `frontend/dist/`
+* The public Clerk key gets baked into the JS here (`VITE_CLERK_PUBLISHABLE_KEY`)
+
+### Stage 2 — Build the backend (the API)
+
+* Takes your Express code in `backend/`
+* `npm run build` here literally just copies `src/` → `dist/` (your backend is plain JS, nothing to compile)
+
+### Stage 3 — The final runtime image (the only one that ships)
+
+* Installs only production dependencies (no dev tools, keeps the image small)
+* Copies the backend code → `dist/`
+* Copies the frontend's built files → a folder called `public/` ← **this is the key move**
+* Starts the server...
