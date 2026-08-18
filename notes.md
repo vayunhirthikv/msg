@@ -52,3 +52,24 @@ Your **Dockerfile** builds the image in **3 stages**:
 * Copies the backend code → `dist/`
 * Copies the frontend's built files → a folder called `public/` ← **this is the key move**
 * Starts the server...
+
+
+## What multer does
+
+Multer's one job: parse `multipart/form-data` requests so you can access uploaded files.
+
+When the browser sends a file, it doesn't send JSON — it sends the request as `multipart/form-data`: a special encoding that bundles the file's raw bytes + its metadata (filename, mimetype) + any other form fields, all glued together with "boundary" markers.
+
+Express's normal body parsers can't read this format:
+
+* `express.json()` → only understands JSON
+* `express.urlencoded()` → only understands simple text fields, not files
+
+So without multer, `req.body` for a file upload would just be garbage/empty. Multer is the translator that decodes that multipart blob into something usable.
+
+## What an aggregation pipeline is
+
+In MongoDB, an **aggregation pipeline** is a way to process documents through a sequence of *stages*, where each stage transforms the output and passes it to the next stage — like a Unix pipe (`cat file | grep x | sort`).
+
+A regular query (`Message.find(...)`) just filters and returns documents as-is. Aggregation goes further: it can group, reshape, join, and sort in ways `find()` can't. Each stage is an object keyed by an operator that starts with `$` (`$match`, `$group`, `$sort`, etc.), and you pass an **array** of them — that array is the pipeline.
+
