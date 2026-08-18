@@ -6,6 +6,7 @@ import {protectRoute} from "../middleware/auth.middleware.js";
 import { upload } from "../middleware/upload.middleware.js";
 import { sendMessage } from "../controllers/message.controllers.js";
 
+// /api/messages
 
 const router= express.Router();
 

@@ -73,3 +73,9 @@ In MongoDB, an **aggregation pipeline** is a way to process documents through a 
 
 A regular query (`Message.find(...)`) just filters and returns documents as-is. Aggregation goes further: it can group, reshape, join, and sort in ways `find()` can't. Each stage is an object keyed by an operator that starts with `$` (`$match`, `$group`, `$sort`, etc.), and you pass an **array** of them — that array is the pipeline.
 
+
+
+socket.io:(on top of the express we have socket server)
+    powerful realtime communication lib for webapp
+    instant, bidirectional communications btwn client and server
+    allow data to be pushed to client without the need for client to request it

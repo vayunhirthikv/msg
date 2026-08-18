@@ -1,11 +1,13 @@
 import { getAuth } from "@clerk/express";
 import User from "../models/user.model.js";
 
-
+//Check whether the request comes from a logged-in Clerk user, 
+// find that user in MongoDB, attach the MongoDB user to req.user, 
+// and then allow the request to continue.
 
 export async function protectRoute(req,res,next){
     try {
-        const {userId}=getAuth(req);
+        const {userId}=getAuth(req);//if we get null means unauthorized user
 
         if(!userId){
             res.status(401).json({message:"Unauthorized "});
@@ -17,7 +19,7 @@ export async function protectRoute(req,res,next){
             return;
         }
         req.user=user;
-        next();
+        next(); //move to the next middleware
 
     } catch (error) {
         console.log("error in protected middleware",error.message);
