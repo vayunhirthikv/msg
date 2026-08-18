@@ -1,10 +1,10 @@
 import express from "express";
-import {getUsersForSidebars} from "../controllers/message.controllers";
-import{getConversationsForSidebar} from "../controllers/message.controllers";
-import{getMesssages} from "../controllers/message.controllers";
-import {protectRoute} from "../middleware/auth.middleware;"
-import { upload } from "../middleware/upload.middleware";
-import { sendMessage } from "../controllers/message.controllers";
+import {getUsersForSidebars} from "../controllers/message.controllers.js";
+import{getConversationsForSidebar} from "../controllers/message.controllers.js";
+import{getMesssages} from "../controllers/message.controllers.js";
+import {protectRoute} from "../middleware/auth.middleware.js";
+import { upload } from "../middleware/upload.middleware.js";
+import { sendMessage } from "../controllers/message.controllers.js";
 
 
 const router= express.Router();
