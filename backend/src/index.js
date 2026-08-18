@@ -7,6 +7,8 @@ import cors from "cors";
 import fs from "fs";
 import path from "path";
 import clerkWebhook from "./webhooks/clerk.webhook.js";
+import authRoutes from "./routes/auth.route.js"
+
 
 const app=express();
 const PORT=process.env.PORT;
@@ -26,7 +28,9 @@ app.use(clerkMiddleware());
 
 app.get("/health",(req,res)=>{
     res.status(200).json({ok:true});
-})
+});
+
+app.use("/api/auth",authRoutes);
 
 
 //if public dir exists, serve the static files
