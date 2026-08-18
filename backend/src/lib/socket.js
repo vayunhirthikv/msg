@@ -7,7 +7,7 @@ const server=http.createServer(app);
 
 const allowOrigin=process.env.FRONTEND_URL;
 
-const io=new Server(server,{cors:{origin:{allowedOrigin}}});
+const io=new Server(server,{cors:{origin:{allowOrigin}}});
 
 
 const userSocketMap={};//key=>user id; value=>socket id
