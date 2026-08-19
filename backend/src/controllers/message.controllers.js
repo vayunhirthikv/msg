@@ -49,16 +49,16 @@ export async function getConversationsForSidebar(req, res) {
 
 export async function getMesssages(req,res) {
     try {
-        const userToChat=req.params.id;
+        const userToChatId = req.params.id;
         //GET /api/messages/12345 => Express sees :id in the route and puts the value into req.params
-        const myId=req.user._id;
+        const myId = req.user._id;
 
-        const messages=await Message.find({
+        const messages = await Message.find({
             $or:[
-                {senderId:myId,receiverId:userToChatId},
-                {senderId:userToChatId,receiverId:myId},
+                {senderId:myId, receiverId:userToChatId},
+                {senderId:userToChatId, receiverId:myId},
             ]
-        }).sort({createdAt:1})
+        }).sort({createdAt:1});
 
         res.status(200).json(messages);
     } catch (error) {
@@ -67,7 +67,7 @@ export async function getMesssages(req,res) {
     }
 }
 
-export async function sendMessage(req,result) {
+export async function sendMessage(req,res) {
     try {
         const text=req.body.text;
         const receiverId=req.params.id;

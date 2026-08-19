@@ -4,7 +4,7 @@ import { persist } from "zustand/middleware";
 import { axiosInstance } from "../lib/axios";
 import { useAuthStore } from "./useAuthStore";
 import toast from "react-hot-toast";
-
+//persist remembers user settings (like Sound On/Off) in localStorage across page reloads.
 export const useChatStore = create(
   persist(
     (set, get) => ({
@@ -25,14 +25,14 @@ export const useChatStore = create(
       getUsers: async () => {
         set({ isUsersLoading: true });
         try {
-          const res = await axiosInstance.get("/messages/users");
+          const res = await axiosInstance.get("/messages/users");//baseURL: import.meta.env.MODE === "development" ? "http://localhost:3000/api" : "/api" in axios.js
           set((state) => ({
             users: res.data,
             selectedUser:
               state.selectedUser && res.data.some((user) => user._id === state.selectedUser._id)
                 ? state.selectedUser
                 : null,
-          }));
+          }));//if the users in the sidebar is still there or they deleted their accounts
         } catch (error) {
           console.log("Error in get Users", error.message);
         } finally {
@@ -71,7 +71,7 @@ export const useChatStore = create(
 
         try {
           const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, messageData);
-          set({ messages: [...messages, res.data], composerText: "" });
+          set({ messages: [...messages, res.data], composerText: "" });//update the UI immediately
           get().getConversations();
           return true;
         } catch (error) {

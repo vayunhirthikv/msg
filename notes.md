@@ -79,3 +79,7 @@ socket.io:(on top of the express we have socket server)
     powerful realtime communication lib for webapp
     instant, bidirectional communications btwn client and server
     allow data to be pushed to client without the need for client to request it
+
+
+Zustand:
+    Zustand is a library for managing shared/global state in React.
