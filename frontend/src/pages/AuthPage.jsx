@@ -4,6 +4,9 @@ import { AuthHeroPanel } from "../components/auth/AuthHeroPanel";
 import { AuthActionPanel } from "../components/auth/AuthActionPanel";
 import { useWallpaper } from '../context/wallpaper';
 
+
+
+
 export default function AuthPage() {
     const {frameStyle}=useWallpaper();
     return (
