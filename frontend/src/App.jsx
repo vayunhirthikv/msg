@@ -20,7 +20,7 @@ function App() {
   //below is recommended cuz it wont re-render everything
   const clearAuth=useAuthStore((state)=>state.clearAuth);//instead of state u can use any variable
   const checkAuth=useAuthStore((state)=>state.checkAuth);
-  const ischeckAuth=useAuthStore((state)=>state.ischeckAuth);
+  const isCheckingAuth=useAuthStore((state)=>state.isCheckingAuth);
 
   useEffect(()=>{
     if(!isLoaded){return;}
@@ -34,7 +34,7 @@ function App() {
   },[checkAuth,clearAuth,isLoaded,isSignedIn ])
 
 
-  if(!isLoaded|| isSignedIn&&checkAuth){
+  if(!isLoaded || (isSignedIn && isCheckingAuth)){
     return(
       <PageLoader/>
     )
